@@ -1,0 +1,63 @@
+.totop{
+  height: 15px;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  transition: 1s;
+  animation: TopBot  2s ease 0s infinite;
+  -webkit-animation: TopBot 2s ease 0s infinite;
+  -moz-animation: TopBot 2s ease 0s infinite;
+  &:hover{
+    animation-play-state: paused;
+    li{
+      a{
+        background-color: limegreen;
+      }
+    }
+  }
+  li{
+    list-style-type: none;
+    a{
+      width: 30px;
+      height: 30px;
+      color: #020029;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 1s;
+      background-color: lime;
+      animation: blur 2s ease 0s infinite;
+      -webkit-animation: blur 2s ease 0s infinite;
+      -moz-animation: blur 2s ease 0s infinite;
+      &:hover{
+        background-color: limegreen;
+      }
+      i{
+        font-size: 25px;
+        transition: 1s;
+      }
+    }
+  }
+}
+
+@keyframes blur {
+ 0% {
+  box-shadow: 0 0 0 lime;
+  }
+  100% {
+    box-shadow: 0 0 100px lime;
+  }
+}
+@keyframes TopBot {
+  0% {
+    bottom: 50px;
+  }
+  50% {
+    bottom: 75px;
+  }
+  100% {
+    bottom: 50px;
+  }
+}
