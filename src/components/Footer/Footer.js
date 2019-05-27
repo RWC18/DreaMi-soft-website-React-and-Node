@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Footer.scss'
 import sendImg from '../../img/Path 56.svg';
 import logo from '../../img/Logo_DM.svg';
 import axios from 'axios';
 
 const Footer = (props) => {
+    const [error, setError] = useState(false);
     let userInputs = {
         name: '',
         email: '',
@@ -15,32 +16,37 @@ const Footer = (props) => {
             userInputs = {
                 ...userInputs,
                 name: event.target.value
-            }
+            };
         } else if (event.target.id === 'email'){
             userInputs = {
                 ...userInputs,
                 email: event.target.value
-            }
+            };
         } else if (event.target.id === 'msg'){
             userInputs = {
                 ...userInputs,
                 message: event.target.value
-            }
+            };
         }
     };
     let mailSend = (event) => {
         event.preventDefault();
-        axios.post(`/api/send-email`, {
-            name: userInputs.name,
-            email: userInputs.email,
-            message: userInputs.message
-        })
-            .then(function (response) {
-                console.log(response);
+        if (userInputs.message.length < 50 && userInputs.name.length < 2 && userInputs.email.length < 5){
+            setError(true);
+        } else  {
+            setError(false);
+            axios.post(`/api/send-email`, {
+                name: userInputs.name,
+                email: userInputs.email,
+                message: userInputs.message
             })
-            .catch(function (error) {
-                console.log(error);
-            });
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     };
     return(
         <footer id="footer">
@@ -61,8 +67,8 @@ const Footer = (props) => {
                             <img alt="send" src={sendImg}/>
                         </button>
                     </div>
-
                 </form>
+                {error ? <p className="error">Something went wrong. Please check your name, email or message !!!</p>: null}
             </div>
             <div>
                 <img className='logo' alt="logo" src={logo}/>

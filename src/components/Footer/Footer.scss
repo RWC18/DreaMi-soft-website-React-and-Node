@@ -17,6 +17,10 @@
         margin-bottom: 25px;
         line-height: 26px;
         font-weight: lighter;
+        &.error{
+          color: red;
+          text-align: center;
+        }
       }
      input{
        width: 100%;
